@@ -1,20 +1,14 @@
-public typealias Teams = ([Player], [Player])
+public typealias Team = [Player]
+public typealias Teams = (Team, Team)
 
-private func shuffle(_ players: [Player]) -> [Player] {
-    func score(lhs: Player, rhs: Player) -> Bool {
-        return lhs.skills.total > rhs.skills.total
-    }
-    return players.shuffled().sorted(by: score)
-}
-
-public func generateTeams(_ players: [Player]) -> Teams {
+public func generateTeams(_ allPlayers: [Player]) -> Teams {
 
     func intoTwoTeams(teams: Teams, player: Player) -> Teams {
 
         let lhsTeam = teams.0
         let rhsTeam = teams.1
 
-        if lhsTeam.count > rhsTeam.count {
+        if totalScore(lhsTeam) > totalScore(rhsTeam) {
             return (lhsTeam, rhsTeam + [player])
         }
         else {
@@ -22,7 +16,14 @@ public func generateTeams(_ players: [Player]) -> Teams {
         }
     }
 
-    return shuffle(players).reduce(([], []), intoTwoTeams)
+    return allPlayers.shuffled().reduce(([], []), intoTwoTeams)
+}
+
+private func totalScore(_ team: Team) -> Int {
+    func toScore(_ score: Int, player: Player) -> Int {
+        return score + player.skills.total
+    }
+    return team.reduce(0, toScore)
 }
 
 public func prettyPrint(_ teams: Teams) {
@@ -33,15 +34,9 @@ public func prettyPrint(_ teams: Teams) {
         print("\(position + 1). \(player.name)")
     }
 
-    func totalScore(_ team: [Player]) -> Int {
-        func toScore(_ score: Int, player :Player) -> Int {
-            return score + player.skills.total
-        }
 
-        return team.reduce(0, toScore)
-    }
 
-    func printTeam(_ teamName: String, _ team: [Player]) {
+    func printTeam(_ teamName: String, _ team: Team) {
         print("------------    \(teamName)    ------------ ")
         team.enumerated().forEach(printPlayer)
         print("------------   Total:\(team |> totalScore)   ------------ ")

@@ -9,7 +9,7 @@ public struct Player: Decodable, Equatable {
 
     public static func ==(lhs: Player, rhs: Player) -> Bool {
         return lhs.name == rhs.name &&
-                lhs.skills == rhs.skills
+            lhs.skills == rhs.skills
     }
 }
 
@@ -31,13 +31,13 @@ public struct Skills: Decodable, Equatable {
         self.stamina = stamina
         self.dribble = dribble
     }
-
+    
     public static func ==(lhs: Skills, rhs: Skills) -> Bool {
         return lhs.pass == rhs.pass &&
-               lhs.shot == rhs.shot &&
-               lhs.stamina == rhs.stamina &&
-               lhs.dribble == rhs.dribble &&
-               lhs.total == rhs.total
+            lhs.shot == rhs.shot &&
+            lhs.stamina == rhs.stamina &&
+            lhs.dribble == rhs.dribble &&
+            lhs.total == rhs.total
     }
 
     public var total: Int {
