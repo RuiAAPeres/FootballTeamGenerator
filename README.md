@@ -43,5 +43,5 @@ It will output two teams:
 ------------   Total:27   ------------ 
 ```
 
-Where the goal is to have a random, but "more or less" balanced teams. 😅
+Where the goal is to have random, but "more or less", balanced teams. 😅
 
