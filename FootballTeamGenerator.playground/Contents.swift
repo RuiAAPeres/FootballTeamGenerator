@@ -15,11 +15,9 @@ let p12 = Player(name: "Player12", skills: Skills(pass: .medium, shot: .medium, 
 let players: [Player] = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12]
 
 private func generate() -> Teams {
-    return players |> shuffle |> generateTeams
+    return players |> generateTeams
 }
 
 func main() {
     generate() |> prettyPrint
 }
-
-main()

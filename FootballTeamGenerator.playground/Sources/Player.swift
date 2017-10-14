@@ -1,4 +1,4 @@
-public struct Player: Decodable {
+public struct Player: Decodable, Equatable {
     public let name: String
     public let skills: Skills
 
@@ -6,15 +6,20 @@ public struct Player: Decodable {
         self.name = name
         self.skills = skills
     }
+
+    public static func ==(lhs: Player, rhs: Player) -> Bool {
+        return lhs.name == rhs.name &&
+                lhs.skills == rhs.skills
+    }
 }
 
-public struct Skills: Decodable {
+public struct Skills: Decodable, Equatable {
     public let pass: Level
     public let shot: Level
     public let stamina: Level
     public let dribble: Level
 
-    public enum Level: Int, Decodable {
+    public enum Level: Int, Decodable, Equatable {
         case low
         case medium
         case high
@@ -25,6 +30,14 @@ public struct Skills: Decodable {
         self.shot = shot
         self.stamina = stamina
         self.dribble = dribble
+    }
+
+    public static func ==(lhs: Skills, rhs: Skills) -> Bool {
+        return lhs.pass == rhs.pass &&
+               lhs.shot == rhs.shot &&
+               lhs.stamina == rhs.stamina &&
+               lhs.dribble == rhs.dribble &&
+               lhs.total == rhs.total
     }
 
     public var total: Int {

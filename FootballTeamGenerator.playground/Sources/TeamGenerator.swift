@@ -1,10 +1,10 @@
 public typealias Teams = ([Player], [Player])
 
-public func shuffle(_ players: [Player]) -> [Player] {
+private func shuffle(_ players: [Player]) -> [Player] {
     func score(lhs: Player, rhs: Player) -> Bool {
         return lhs.skills.total > rhs.skills.total
     }
-    return players.sorted(by: score)
+    return players.shuffled().sorted(by: score)
 }
 
 public func generateTeams(_ players: [Player]) -> Teams {
@@ -22,7 +22,7 @@ public func generateTeams(_ players: [Player]) -> Teams {
         }
     }
 
-    return players.reduce(([], []), intoTwoTeams)
+    return shuffle(players).reduce(([], []), intoTwoTeams)
 }
 
 public func prettyPrint(_ teams: Teams) {
