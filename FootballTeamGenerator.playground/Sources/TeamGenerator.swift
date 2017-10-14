@@ -31,15 +31,15 @@ public func prettyPrint(_ teams: Teams) {
     let team2 = teams.1
 
     func printPlayer(_ position: Int, _ player: Player) {
-        print("\(position + 1). \(player.name)")
+        print("\(position + 1). \(player.name) (\(player.skills.total))")
     }
 
 
 
     func printTeam(_ teamName: String, _ team: Team) {
-        print("------------    \(teamName)    ------------ ")
+        print("------------       \(teamName)       ------------ ")
         team.enumerated().forEach(printPlayer)
-        print("------------   Total:\(team |> totalScore)   ------------ ")
+        print("------------   Total score: \(team |> totalScore)   ------------ ")
     }
 
     printTeam("Team 1", team1)
