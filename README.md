@@ -1,4 +1,4 @@
-#### FootballTeamGenerator
+## FootballTeamGenerator ⚽️
 
 Given a set of players, like: 
 
